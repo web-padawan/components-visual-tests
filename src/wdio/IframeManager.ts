@@ -75,14 +75,7 @@ export class WebdriverIOIFrameManager extends AbstractIFrameManager {
 
     // TODO: fails with SauceLabs with the error
     // RequestError: The `GET` method cannot be used with a body
-    const frameData = await this.driver.executeScript(`
-      return (function() {
-        var iframe = document.getElementById("${frameId}");
-        return iframe;
-      })();
-    `, []);
-
-    const frame = await this.driver.$(frameData);
+    const frame = await this.driver.$(`iframe#${frameId}`);
 
     console.log('frame id:', frame.elementId);
 
