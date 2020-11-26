@@ -6,6 +6,12 @@
 npm i && npm run build
 ```
 
+## Run unit tests
+
+```sh
+npm test
+```
+
 ## Run visual tests
 
 ```sh
@@ -16,4 +22,4 @@ npm run test:visual
 
 ```sh
 npm run test:update
-``
+```
