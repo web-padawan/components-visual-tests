@@ -1,5 +1,5 @@
 import { TestRunnerCoreConfig } from '@web/test-runner-core';
-import { BrowserObject } from 'webdriverio';
+import { BrowserObject, Element } from 'webdriverio';
 import { AbstractIFrameManager, BrowserResult } from '../manager/AbstractIFrameManager';
 
 /**
@@ -68,5 +68,34 @@ export class WebdriverIOIFrameManager extends AbstractIFrameManager {
     `, []);
 
     return returnValue;
+  }
+
+  async takeScreenshot(sessionId: string, locator: string): Promise<Buffer> {
+    const frameId = this.getFrameId(sessionId);
+
+    // TODO: fails with SauceLabs with the error
+    // RequestError: The `GET` method cannot be used with a body
+    const frameData = await this.driver.executeScript(`
+      return (function() {
+        var iframe = document.getElementById("${frameId}");
+        return iframe;
+      })();
+    `, []);
+
+    const frame = await this.driver.$(frameData);
+
+    console.log('frame id:', frame.elementId);
+
+    await this.driver.switchToFrame(frame);
+
+    const elementData = (await this.driver.execute(locator, [])) as Element;
+
+    const element = await this.driver.$(elementData);
+
+    const base64 = await this.driver.takeElementScreenshot(element.elementId, true);
+
+    await this.driver.switchToParentFrame();
+
+    return Buffer.from(base64, 'base64');
   }
 }

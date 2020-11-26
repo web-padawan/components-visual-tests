@@ -94,6 +94,13 @@ export class WebdriverIOLauncher implements BrowserLauncher {
 
     return this.iframeManager;
   }
+
+  takeScreenshot(sessionId: string, locator: string) {
+    if (!this.iframeManager) {
+      throw new Error('Not initialized');
+    }
+    return this.iframeManager.takeScreenshot(sessionId, locator);
+  }
 }
 
 export function webdriverIOLauncher(options: Options) {

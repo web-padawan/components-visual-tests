@@ -36,6 +36,8 @@ export abstract class AbstractIFrameManager {
 
   abstract getTestCoverage(frameId: string): Promise<BrowserResult>;
 
+  abstract takeScreenshot(sessionId: string, locator: string): Promise<Buffer>
+
   constructor(config: TestRunnerCoreConfig, isIE: boolean) {
     this.config = config;
     this.isIE = isIE;
@@ -51,16 +53,21 @@ export abstract class AbstractIFrameManager {
   }
 
   async getBrowserUrl(sessionId: string): Promise<string | undefined> {
-    const frameId = this.framePerSession.get(sessionId);
-    if (!frameId) {
-      throw new Error(
-        `Something went wrong while running tests, there is no frame id for session ${frameId}`,
-      );
-    }
+    const frameId = this.getFrameId(sessionId);
 
     const returnValue = await this.getIframeUrl(frameId);
 
     return returnValue;
+  }
+
+  getFrameId(sessionId: string): string {
+    const frameId = this.framePerSession.get(sessionId);
+    if (!frameId) {
+      throw new Error(
+        `Something went wrong while running tests, there is no frame id for session ${sessionId}`,
+      );
+    }
+    return frameId;
   }
 
   private async scheduleCommand<T>(fn: () => Promise<T>) {
@@ -112,13 +119,7 @@ export abstract class AbstractIFrameManager {
   }
 
   async stopSession(id: string) {
-    const frameId = this.framePerSession.get(id);
-    this.framePerSession.delete(id);
-    if (!frameId) {
-      throw new Error(
-        `Something went wrong while running tests, there is no frame id for session ${id}`,
-      );
-    }
+    const frameId = this.getFrameId(id);
 
     const returnValue = await this.getTestCoverage(frameId);
 
