@@ -6,8 +6,8 @@
   "scripts": {
     "build": "tsc",
     "test": "web-test-runner test/*.test.js",
-    "test:visual": "TEST_ENV=visual web-test-runner test/visual/*.test.js",
-    "test:update": "TEST_ENV=update web-test-runner test/visual/*.test.js"
+    "test:visual": "TEST_ENV=visual web-test-runner test/visual/**/*.test.js",
+    "test:update": "TEST_ENV=update web-test-runner test/visual/**/*.test.js"
   },
   "keywords": [],
   "author": "ia",
