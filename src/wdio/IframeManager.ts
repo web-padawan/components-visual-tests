@@ -18,32 +18,41 @@ export class WebdriverIOIFrameManager extends AbstractIFrameManager {
   }
 
   async getIframeUrl(frameId: string): Promise<string | undefined> {
-    const returnValue = (await this.driver.executeScript(`
+    const returnValue = (await this.driver.executeScript(
+      `
       try {
         var iframe = document.getElementById("${frameId}");
         return iframe.contentWindow.location.href;
       } catch (_) {
         return undefined;
       }
-    `, [])) as string | undefined;
+    `,
+      [],
+    )) as string | undefined;
 
     return returnValue;
   }
 
   async initIframe(frameId: string, url: string): Promise<void> {
-    await this.driver.executeScript(`
+    await this.driver.executeScript(
+      `
       var iframe = document.createElement("iframe");
       iframe.id = "${frameId}";
       iframe.src = "${url}";
       document.body.appendChild(iframe);
-    `, []);
+    `,
+      [],
+    );
   }
 
   async attachToIframe(frameId: string, url: string): Promise<void> {
-    await this.driver.executeScript(`
+    await this.driver.executeScript(
+      `
       var iframe = document.getElementById("${frameId}");
       iframe.src = "${url}";
-    `, []);
+    `,
+      [],
+    );
   }
 
   async getTestCoverage(frameId: string): Promise<BrowserResult> {
@@ -51,7 +60,8 @@ export class WebdriverIOIFrameManager extends AbstractIFrameManager {
     // WebdriverIO from crashing failure with Puppeteer (default mode):
     // Error: Evaluation failed: SyntaxError: Illegal return statement
     // See https://github.com/webdriverio/webdriverio/pull/4829
-    const returnValue = await this.driver.executeScript(`
+    const returnValue = await this.driver.executeScript(
+      `
       return (function() {
         var iframe = document.getElementById("${frameId}");
         var testCoverage;
@@ -65,7 +75,9 @@ export class WebdriverIOIFrameManager extends AbstractIFrameManager {
         iframe.src = "data:,";
         return { testCoverage: testCoverage };
       })();
-    `, []);
+    `,
+      [],
+    );
 
     return returnValue;
   }

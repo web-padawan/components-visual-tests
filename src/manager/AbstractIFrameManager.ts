@@ -36,7 +36,7 @@ export abstract class AbstractIFrameManager {
 
   abstract getTestCoverage(frameId: string): Promise<BrowserResult>;
 
-  abstract takeScreenshot(sessionId: string, locator: string): Promise<Buffer>
+  abstract takeScreenshot(sessionId: string, locator: string): Promise<Buffer>;
 
   constructor(config: TestRunnerCoreConfig, isIE: boolean) {
     this.config = config;

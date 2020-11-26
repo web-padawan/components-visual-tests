@@ -1,5 +1,5 @@
 import { TestRunnerCoreConfig } from '@web/test-runner-core';
-import { Options } from "webdriver";
+import { Options } from 'webdriver';
 import { WebdriverIOLauncher } from '../wdio/webdriverIOLauncher';
 import ip from 'ip';
 import { SauceLabsLauncherManager } from './SauceLabsLauncherManager';
@@ -8,7 +8,7 @@ export class SauceLabsLauncher extends WebdriverIOLauncher {
   constructor(
     private manager: SauceLabsLauncherManager,
     public name: string,
-    seleniumCapabilities: Options
+    seleniumCapabilities: Options,
   ) {
     super(seleniumCapabilities);
   }

@@ -1,4 +1,4 @@
-export function isW3C(capabilities){
+export function isW3C(capabilities) {
   // Only browserVersion is mandatory, platformName is optional
-  return Boolean(capabilities.browserVersion)
+  return Boolean(capabilities.browserVersion);
 }

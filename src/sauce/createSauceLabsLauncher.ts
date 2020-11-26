@@ -3,9 +3,7 @@ import { SauceLabsLauncher } from './SauceLabsLauncher';
 import { SauceLabsLauncherManager } from './SauceLabsLauncherManager';
 import { processConfig } from './process-config';
 
-export function createSauceLabsLauncher(
-  config: Record<string, string>
-) {
+export function createSauceLabsLauncher(config: Record<string, string>) {
   if (config == null) {
     throw new Error('Options are required to set user and key.');
   }
@@ -23,18 +21,10 @@ export function createSauceLabsLauncher(
       throw new Error('Capabilities are required.');
     }
 
-    const {
-      sauceConnectOptions,
-      seleniumCapabilities,
-      browserName
-    } = processConfig(config, args);
+    const { sauceConnectOptions, seleniumCapabilities, browserName } = processConfig(config, args);
 
     const manager = new SauceLabsLauncherManager(seleniumCapabilities, sauceConnectOptions);
 
-    return new SauceLabsLauncher(
-      manager,
-      browserName,
-      seleniumCapabilities
-    );
+    return new SauceLabsLauncher(manager, browserName, seleniumCapabilities);
   };
 }

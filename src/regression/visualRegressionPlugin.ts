@@ -49,7 +49,9 @@ export function visualRegressionPlugin(
           if (session.browser.type === 'wdio') {
             const browser = session.browser as WebdriverIOLauncher;
 
-            const screenshot = await browser.takeScreenshot(session.id, `
+            const screenshot = await browser.takeScreenshot(
+              session.id,
+              `
               return (function () {
                 try {
                   var wtr = window.__WTR_VISUAL_REGRESSION__;
@@ -58,7 +60,8 @@ export function visualRegressionPlugin(
                   return undefined;
                 }
               })();
-            `);
+            `,
+            );
 
             return visualDiffCommand(mergedOptions, screenshot, session.browser.name, payload.name);
           }

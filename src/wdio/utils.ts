@@ -1,7 +1,7 @@
-import { DesiredCapabilities } from "webdriver";
+import { DesiredCapabilities } from 'webdriver';
 
 function getPlatform(c: DesiredCapabilities) {
-  return c.platformName || c.platform
+  return c.platformName || c.platform;
 }
 
 export function getBrowserName(c: DesiredCapabilities): string {

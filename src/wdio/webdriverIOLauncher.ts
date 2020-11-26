@@ -1,6 +1,6 @@
 import { BrowserLauncher, TestRunnerCoreConfig } from '@web/test-runner-core';
-import { Options } from "webdriver";
-import { remote, BrowserObject } from "webdriverio";
+import { Options } from 'webdriver';
+import { remote, BrowserObject } from 'webdriverio';
 import { WebdriverIOIFrameManager } from './IFrameManager';
 import { getBrowserLabel, getBrowserName } from './utils';
 
