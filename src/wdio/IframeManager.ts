@@ -75,17 +75,19 @@ export class WebdriverIOIFrameManager extends AbstractIFrameManager {
 
     const frame = await this.driver.$(`iframe#${frameId}`);
 
-    console.log('frame id:', frame.elementId);
-
-    // TODO: fails with SauceLabs with the error
-    // RequestError: The `GET` method cannot be used with a body
     await this.driver.switchToFrame(frame);
 
     const elementData = (await this.driver.execute(locator, [])) as Element;
 
     const element = await this.driver.$(elementData);
 
-    const base64 = await this.driver.takeElementScreenshot(element.elementId, true);
+    let base64;
+
+    try {
+      base64 = await this.driver.takeElementScreenshot(element.elementId);
+    } catch (err) {
+      console.log('Failed to take a screenshot:', err);
+    }
 
     await this.driver.switchToParentFrame();
 
