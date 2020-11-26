@@ -3,7 +3,12 @@ const { createSauceLabsLauncher } = require('./dist/sauce/index');
 const { visualRegressionPlugin } = require('./dist/regression/index');
 
 const config = {
-  nodeResolve: true
+  nodeResolve: true,
+  testFramework: {
+    config: {
+      timeout: '20000' // default 2000
+    }
+  },
 };
 
 if (process.env.TEST_ENV === 'visual' || process.env.TEST_ENV === 'update') {
