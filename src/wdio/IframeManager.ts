@@ -46,17 +46,14 @@ export class IFrameManager {
   async getBrowserUrl(sessionId: string): Promise<string | undefined> {
     const frameId = this.getFrameId(sessionId);
 
-    const returnValue = (await this.driver.execute(
-      `
+    const returnValue = (await this.driver.execute(`
       try {
         var iframe = document.getElementById("${frameId}");
         return iframe.contentWindow.location.href;
       } catch (_) {
         return undefined;
       }
-    `,
-      [],
-    )) as string | undefined;
+    `)) as string | undefined;
 
     return returnValue;
   }
@@ -105,25 +102,19 @@ export class IFrameManager {
     let frameId: string;
     if (this.inactiveFrames.length > 0) {
       frameId = this.inactiveFrames.pop()!;
-      await this.driver.execute(
-        `
+      await this.driver.execute(`
         var iframe = document.getElementById("${frameId}");
         iframe.src = "${url}";
-      `,
-        [],
-      );
+      `);
     } else {
       this.frameCount += 1;
       frameId = `wtr-test-frame-${this.frameCount}`;
-      await this.driver.execute(
-        `
+      await this.driver.execute(`
         var iframe = document.createElement("iframe");
         iframe.id = "${frameId}";
         iframe.src = "${url}";
         document.body.appendChild(iframe);
-      `,
-        [],
-      );
+      `);
     }
 
     this.framePerSession.set(id, frameId);
@@ -140,8 +131,7 @@ export class IFrameManager {
     // WebdriverIO from crashing failure with Puppeteer (default mode):
     // Error: Evaluation failed: SyntaxError: Illegal return statement
     // See https://github.com/webdriverio/webdriverio/pull/4829
-    const returnValue = await this.driver.execute(
-      `
+    const returnValue = await this.driver.execute(`
       return (function() {
         var iframe = document.getElementById("${frameId}");
         var testCoverage;
@@ -155,9 +145,7 @@ export class IFrameManager {
         iframe.src = "data:,";
         return { testCoverage: testCoverage };
       })();
-    `,
-      [],
-    );
+    `);
 
     if (!validateBrowserResult(returnValue)) {
       throw new Error();
