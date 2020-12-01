@@ -11,7 +11,7 @@ const config = {
   },
 };
 
-if (process.env.TEST_ENV === 'visual' || process.env.TEST_ENV === 'update') {
+if (process.env.TEST_ENV === 'visual' || process.env.TEST_ENV === 'update') {
   config.concurrency = 1;
 
   config.plugins = [
@@ -22,7 +22,7 @@ if (process.env.TEST_ENV === 'visual' || process.env.TEST_ENV === 'update') {
       },
       update: process.env.TEST_ENV === 'update'
     })
-  ]
+  ];
 }
 
 const sauceLabsLauncher = createSauceLabsLauncher({
@@ -44,6 +44,5 @@ config.browsers = [
     browserVersion: 'latest'
   })
 ];
-
 
 module.exports = config;
