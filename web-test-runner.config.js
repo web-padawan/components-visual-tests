@@ -1,4 +1,4 @@
-const { webdriverIOLauncher } = require('./dist/wdio/index');
+// const { webdriverIOLauncher } = require('./dist/wdio/index');
 const { createSauceLabsLauncher } = require('./dist/sauce/index');
 const { visualRegressionPlugin } = require('./dist/regression/index');
 
@@ -31,18 +31,18 @@ const sauceLabsLauncher = createSauceLabsLauncher({
 });
 
 config.browsers = [
+  /*
   webdriverIOLauncher({
     capabilities: {
       browserName: 'Chrome'
     }
   }),
-  /*
+  */
   sauceLabsLauncher({
     browserName: 'chrome',
     platformName: 'Windows 10',
     browserVersion: 'latest'
   })
-  */
 ];
 
 
