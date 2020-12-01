@@ -1,8 +1,7 @@
 import { BrowserLauncher, TestRunnerCoreConfig } from '@web/test-runner-core';
-import { Options } from 'webdriver';
-import { remote, BrowserObject } from 'webdriverio';
-import { WebdriverIOIFrameManager } from './IFrameManager';
-import { getBrowserLabel, getBrowserName } from './utils';
+import { remote, BrowserObject, RemoteOptions } from 'webdriverio';
+import { IFrameManager } from './IFrameManager';
+import { getBrowserLabel } from './utils';
 
 export class WebdriverIOLauncher implements BrowserLauncher {
   public name = 'Initializing...';
@@ -10,21 +9,21 @@ export class WebdriverIOLauncher implements BrowserLauncher {
   private config?: TestRunnerCoreConfig;
   private driver?: BrowserObject;
   private debugDriver: undefined | BrowserObject = undefined;
-  private iframeManager?: WebdriverIOIFrameManager;
-  private __iframeManagerPromise?: Promise<WebdriverIOIFrameManager>;
+  private iframeManager?: IFrameManager;
+  private __iframeManagerPromise?: Promise<IFrameManager>;
   private isIE = false;
 
-  constructor(private options: Options) {}
+  constructor(private options: RemoteOptions) {}
 
   async initialize(config: TestRunnerCoreConfig) {
     this.config = config;
 
-    const options: Options = { logLevel: 'error', ...this.options };
+    const options: RemoteOptions = { logLevel: 'error', ...this.options };
     this.driver = await remote(options);
 
     const cap = this.driver.capabilities;
     this.name = getBrowserLabel(cap);
-    const browserName = getBrowserName(cap).toLowerCase().replace(/_/g, ' ');
+    const browserName = cap.browserName?.toLowerCase().replace(/_/g, ' ') || '';
     this.isIE =
       (browserName.includes('internet') && browserName.includes('explorer')) ||
       browserName === 'ie' ||
@@ -90,7 +89,7 @@ export class WebdriverIOLauncher implements BrowserLauncher {
   private async createIframeManager() {
     if (!this.config) throw new Error('Not initialized');
 
-    this.iframeManager = new WebdriverIOIFrameManager(this.config, this.driver, this.isIE);
+    this.iframeManager = new IFrameManager(this.config, this.driver, this.isIE);
 
     return this.iframeManager;
   }
@@ -103,7 +102,7 @@ export class WebdriverIOLauncher implements BrowserLauncher {
   }
 }
 
-export function webdriverIOLauncher(options: Options) {
+export function webdriverIOLauncher(options: RemoteOptions) {
   if (!options?.capabilities) {
     throw new Error(`WebdriverIO launcher requires a capabilities property.`);
   }
