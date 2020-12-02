@@ -72,4 +72,26 @@ describe('text-field', () => {
     element.helperText = 'Helper text';
     await visualTest('helper-text');
   });
+
+  it('clear button', async () => {
+    element.value = 'value';
+    element.clearButtonVisible = true;
+    await visualTest('clear-button');
+  });
+
+  it('prefix slot', async () => {
+    const span = document.createElement('span');
+    span.setAttribute('slot', 'prefix');
+    span.textContent = '$';
+    element.appendChild(span);
+    await visualTest('prefix');
+  });
+
+  it('suffix slot', async () => {
+    const span = document.createElement('span');
+    span.setAttribute('slot', 'suffix');
+    span.textContent = '$';
+    element.appendChild(span);
+    await visualTest('suffix');
+  });
 });

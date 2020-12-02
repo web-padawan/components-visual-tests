@@ -61,4 +61,14 @@ describe('checkbox', () => {
     element.indeterminate = true;
     await visualTest('disabled-indeterminate');
   });
+
+  it('empty', async () => {
+    element.textContent = '';
+    await visualTest('empty');
+  });
+
+  it('RTL', async () => {
+    document.documentElement.setAttribute('dir', 'rtl');
+    await visualTest('rtl');
+  });
 });
