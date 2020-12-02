@@ -1,6 +1,18 @@
 // const { webdriverIOLauncher } = require('./dist/wdio/index');
 const { createSauceLabsLauncher } = require('./dist/sauce/index');
 const { visualRegressionPlugin } = require('./dist/regression/index');
+const path = require('path');
+
+const getFileName = ({ browser, name }, type, diff) => {
+  const [theme, component, test] = name.split(':');
+  return path.join(
+    browser.replace('windows ', ''),
+    type,
+    theme,
+    component,
+    diff ? `${test}-diff` : test,
+  );
+};
 
 const config = {
   nodeResolve: true,
@@ -17,6 +29,9 @@ if (process.env.TEST_ENV === 'visual' || process.env.TEST_ENV === 'update') {
   config.plugins = [
     visualRegressionPlugin({
       baseDir: 'test/visual/screenshots',
+      getBaselineName: (args) => getFileName(args, 'baseline'),
+      getDiffName: (args) => getFileName(args, 'failed', true),
+      getFailedName: (args) => getFileName(args, 'failed'),
       diffOptions: {
         threshold: 0.2
       },

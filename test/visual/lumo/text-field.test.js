@@ -1,8 +1,12 @@
 import { visualDiff } from '../../../src/regression/browser/commands.mjs';
 import '@vaadin/vaadin-text-field';
 
-describe('visual tests', () => {
+describe('text-field', () => {
   let div, element;
+
+  async function visualTest(name) {
+    await visualDiff(div, `lumo:text-field:${name}`);
+  }
 
   beforeEach(() => {
     div = document.createElement('div');
@@ -17,17 +21,51 @@ describe('visual tests', () => {
     document.body.removeChild(div);
   });
 
-  it('default', async () => {
-    await visualDiff(div, 'lumo-text-field-default');
+  it('basic', async () => {
+    await visualTest('basic');
   });
 
   it('disabled', async () => {
     element.disabled = true;
-    await visualDiff(div, 'lumo-text-field-disabled');
+    await visualTest('disabled');
+  });
+
+  it('readonly', async () => {
+    element.disabled = true;
+    await visualTest('readonly');
   });
 
   it('label', async () => {
     element.label = 'Label';
-    await visualDiff(div, 'lumo-text-field-label');
+    await visualTest('label');
+  });
+
+  it('placeholder', async () => {
+    element.placeholder = 'Placeholder';
+    await visualTest('placeholder');
+  });
+
+  it('value', async () => {
+    element.value = 'value';
+    await visualTest('value');
+  });
+
+  it('required', async () => {
+    element.label = 'Label';
+    element.required = true;
+    await visualTest('required');
+  });
+
+  it('error message', async () => {
+    element.label = 'Label';
+    element.errorMessage = 'This field is required';
+    element.required = true;
+    element.validate();
+    await visualTest('error-message');
+  });
+
+  it('helper text', async () => {
+    element.helperText = 'Helper text';
+    await visualTest('helper-text');
   });
 });
