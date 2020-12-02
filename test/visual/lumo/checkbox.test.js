@@ -2,25 +2,28 @@ import { visualDiff } from '../../../src/regression/browser/commands.mjs';
 import '@vaadin/vaadin-checkbox/vaadin-checkbox.js';
 
 describe('checkbox', () => {
-  let div, element, text;
+  let div, element;
 
   async function visualTest(name) {
     await visualDiff(div, `lumo:checkbox:${name}`);
   }
 
-  beforeEach(() => {
-    div = document.createElement('div');
-    div.style.padding = '10px';
-    div.style.display = 'inline-block';
-    element = document.createElement('vaadin-checkbox');
-    div.appendChild(element);
+  before(() => {
+    const range = new Range().createContextualFragment(
+      '<div style="padding: 10px; display: inline-block"></div>'
+    );
+    div = range.firstElementChild;
     document.body.appendChild(div);
-    text = document.createTextNode('Checkbox');
-    element.appendChild(text);
+  });
+
+  beforeEach(() => {
+    element = document.createElement('vaadin-checkbox');
+    element.textContent = 'Checkbox';
+    div.appendChild(element);
   });
 
   afterEach(() => {
-    document.body.removeChild(div);
+    div.removeChild(element);
   });
 
   it('basic', async () => {

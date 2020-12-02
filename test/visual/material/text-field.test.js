@@ -8,17 +8,21 @@ describe('text-field', () => {
     await visualDiff(div, `material:text-field:${name}`);
   }
 
-  beforeEach(() => {
-    div = document.createElement('div');
-    div.style.padding = '10px';
-    div.style.display = 'inline-block';
-    element = document.createElement('vaadin-text-field');
-    div.appendChild(element);
+  before(() => {
+    const range = new Range().createContextualFragment(
+      '<div style="padding: 10px; display: inline-block"></div>'
+    );
+    div = range.firstElementChild;
     document.body.appendChild(div);
   });
 
+  beforeEach(() => {
+    element = document.createElement('vaadin-text-field');
+    div.appendChild(element);
+  });
+
   afterEach(() => {
-    document.body.removeChild(div);
+    div.removeChild(element);
   });
 
   it('basic', async () => {

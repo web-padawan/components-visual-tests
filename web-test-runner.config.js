@@ -26,6 +26,16 @@ const config = {
 if (process.env.TEST_ENV === 'visual' || process.env.TEST_ENV === 'update') {
   config.concurrency = 1;
 
+  config.testRunnerHtml = testFramework => `
+    <!DOCTYPE html>
+    <html>
+      <body>
+        <script>window.polymerSkipLoadingFontRoboto = true;</script>
+        <script type="module" src="${testFramework}"></script>
+      </body>
+    </html>
+  `;
+
   config.plugins = [
     visualRegressionPlugin({
       baseDir: 'test/visual/screenshots',
