@@ -47,8 +47,8 @@ export function createSauceLabsLauncher(
       ...saucelabsCapabilities,
     };
 
-    // Setting 'sauce:options' forces SauceLabs to use W3C capabilities.
-    // Only browserVersion is mandatory, platformName is optional.
+    // W3C capabilities: only browserVersion is mandatory, platformName is optional.
+    // Note that setting 'sauce:options' forces SauceLabs to use W3C capabilities.
     if (capabilities.browserVersion) {
       finalCapabilities.platformName =
         finalCapabilities.platformName || finalCapabilities.platform || 'Windows 10';
@@ -61,7 +61,7 @@ export function createSauceLabsLauncher(
       delete finalCapabilities.version;
       delete finalCapabilities.platform;
     } else {
-      // Use JWP capabilities for remote environments not yet supporting W3C.
+      // JWP capabilities for remote environments not yet supporting W3C.
       // This enables running tests on iPhone Simulators in SauceLabs.
       finalCapabilities = { ...finalCapabilities, ...finalSauceCapabilities };
     }
