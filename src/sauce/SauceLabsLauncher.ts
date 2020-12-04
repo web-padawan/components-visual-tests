@@ -1,20 +1,22 @@
 import { TestRunnerCoreConfig } from '@web/test-runner-core';
-import { Options } from 'webdriver';
-import { WebdriverIOLauncher } from '../wdio/webdriverIOLauncher';
+import { RemoteOptions } from 'webdriverio';
+import { WebdriverLauncher } from '@web/test-runner-webdriver';
 import ip from 'ip';
 import { SauceLabsLauncherManager } from './SauceLabsLauncherManager';
 
-export class SauceLabsLauncher extends WebdriverIOLauncher {
+const networkAddress = ip.address();
+
+export class SauceLabsLauncher extends WebdriverLauncher {
   constructor(
     private manager: SauceLabsLauncherManager,
     public name: string,
-    seleniumCapabilities: Options,
+    options: RemoteOptions,
   ) {
-    super(seleniumCapabilities);
+    super(options);
   }
 
   startSession(sessionId: string, url: string) {
-    return super.startSession(sessionId, url.replace(/(localhost|127\.0\.0\.1)/, ip.address()));
+    return super.startSession(sessionId, url.replace(/(localhost|127\.0\.0\.1)/, networkAddress));
   }
 
   async startDebugSession() {

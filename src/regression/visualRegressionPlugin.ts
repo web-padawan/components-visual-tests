@@ -1,8 +1,8 @@
 import { TestRunnerPlugin } from '@web/test-runner-core';
 import { defaultOptions, VisualRegressionPluginOptions } from './config';
 import { visualDiffCommand, VisualDiffCommandResult } from './visualDiffCommand';
+import type { WebdriverLauncher } from '@web/test-runner-webdriver';
 import { VisualRegressionError } from './VisualRegressionError';
-import type { WebdriverIOLauncher } from '../wdio/index';
 
 interface Payload {
   id: string;
@@ -47,7 +47,7 @@ export function visualRegressionPlugin(
           }
 
           if (session.browser.type === 'wdio') {
-            const browser = session.browser as WebdriverIOLauncher;
+            const browser = session.browser as WebdriverLauncher;
 
             const screenshot = await browser.takeScreenshot(
               session.id,

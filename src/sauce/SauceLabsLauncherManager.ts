@@ -34,7 +34,6 @@ export class SauceLabsLauncherManager {
     }
 
     console.log('[Saucelabs] Setting up Sauce Connect proxy...');
-
     this.connectionPromise = this.api.startSauceConnect({
       ...this.connectOptions,
       noSslBumpDomains: `127.0.0.1,localhost,${ip.address()}`,

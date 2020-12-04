@@ -1,4 +1,3 @@
-// const { webdriverIOLauncher } = require('./dist/wdio/index');
 const { createSauceLabsLauncher } = require('./dist/sauce/index');
 const { visualRegressionPlugin } = require('./dist/regression/index');
 const path = require('path');
@@ -50,19 +49,18 @@ if (process.env.TEST_ENV === 'visual' || process.env.TEST_ENV === 'update') {
   ];
 }
 
-const sauceLabsLauncher = createSauceLabsLauncher({
-  user: process.env.SAUCE_USERNAME,
-  key: process.env.SAUCE_ACCESS_KEY
-});
+const sauceLabsLauncher = createSauceLabsLauncher(
+  {
+    user: process.env.SAUCE_USERNAME,
+    key: process.env.SAUCE_ACCESS_KEY,
+  },
+  {
+    name: 'Components visual tests',
+    build: `${process.env.GITHUB_REF || 'local'} build ${process.env.GITHUB_RUN_NUMBER || ''}`
+  }
+);
 
 config.browsers = [
-  /*
-  webdriverIOLauncher({
-    capabilities: {
-      browserName: 'Chrome'
-    }
-  }),
-  */
   sauceLabsLauncher({
     browserName: 'chrome',
     platformName: 'Windows 10',
