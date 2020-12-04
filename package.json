@@ -1,16 +1,16 @@
 {
-  "name": "test-runner-wdio",
-  "version": "1.0.0",
+  "name": "components-visual-tests",
+  "private": true,
   "description": "",
   "main": "index.js",
   "scripts": {
     "build": "tsc",
-    "test": "web-test-runner test/*.test.js",
-    "test:visual": "TEST_ENV=visual web-test-runner test/visual/**/*.test.js",
-    "test:update": "TEST_ENV=update web-test-runner test/visual/**/*.test.js"
+    "test-lumo": "web-test-runner --config web-test-runner-lumo.config.js test/visual/lumo/**/*.test.js",
+    "test-material": "web-test-runner --config web-test-runner-material.config.js test/visual/material/**/*.test.js",
+    "update-lumo": "TEST_ENV=update npm run test-lumo",
+    "update-material": "TEST_ENV=update npm run test-material"
   },
   "keywords": [],
-  "author": "ia",
   "license": "MIT",
   "dependencies": {
     "@types/mkdirp": "^1.0.1",

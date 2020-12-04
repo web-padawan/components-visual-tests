@@ -1,25 +1,35 @@
-# WebdriverIO plugin for Web Test Runner
+# Vaadin components visual tests
 
 ## Setup
 
 ```sh
-npm i && npm run build
+npm i
 ```
 
-## Run unit tests
+## Run visual visual tests
+
+Lumo theme:
 
 ```sh
-npm test
+npm run test-lumo
 ```
 
-## Run visual tests
+Material theme:
 
 ```sh
-npm run test:visual
+npm run test-material
 ```
 
-## Update screenshots
+## Update baseline screenshots
+
+Lumo theme:
 
 ```sh
-npm run test:update
+npm run update-lumo
+```
+
+Material theme:
+
+```sh
+npm run update-material
 ```
