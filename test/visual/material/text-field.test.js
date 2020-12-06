@@ -35,7 +35,7 @@ describe('text-field', () => {
   });
 
   it('readonly', async () => {
-    element.disabled = true;
+    element.readonly = true;
     await visualTest('readonly');
   });
 

@@ -1,11 +1,13 @@
 import { visualDiff } from '../../../src/regression/browser/commands.mjs';
-import '@vaadin/vaadin-text-field/vaadin-text-field.js';
+import '@vaadin/vaadin-select/vaadin-select.js';
+import '@vaadin/vaadin-list-box/vaadin-list-box.js';
+import '@vaadin/vaadin-item/vaadin-item.js';
 
-describe('text-field', () => {
+describe('select', () => {
   let div, element;
 
   async function visualTest(name) {
-    await visualDiff(div, `text-field:${name}`);
+    await visualDiff(div, `select:${name}`);
   }
 
   before(() => {
@@ -17,7 +19,7 @@ describe('text-field', () => {
   });
 
   beforeEach(() => {
-    element = document.createElement('vaadin-text-field');
+    element = document.createElement('vaadin-select');
     div.appendChild(element);
   });
 
@@ -50,6 +52,13 @@ describe('text-field', () => {
   });
 
   it('value', async () => {
+    element.renderer = (root) => {
+      root.innerHTML = `
+        <vaadin-list-box>
+          <vaadin-item>value</vaadin-item>
+        </vaadin-list-box>
+      `;
+    }
     element.value = 'value';
     await visualTest('value');
   });
@@ -74,6 +83,13 @@ describe('text-field', () => {
   });
 
   it('clear button', async () => {
+    element.renderer = (root) => {
+      root.innerHTML = `
+        <vaadin-list-box>
+          <vaadin-item>value</vaadin-item>
+        </vaadin-list-box>
+      `;
+    }
     element.value = 'value';
     element.clearButtonVisible = true;
     await visualTest('clear-button');
@@ -85,13 +101,5 @@ describe('text-field', () => {
     span.textContent = '$';
     element.appendChild(span);
     await visualTest('prefix');
-  });
-
-  it('suffix slot', async () => {
-    const span = document.createElement('span');
-    span.setAttribute('slot', 'suffix');
-    span.textContent = '$';
-    element.appendChild(span);
-    await visualTest('suffix');
   });
 });
