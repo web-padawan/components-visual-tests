@@ -28,11 +28,6 @@ const config = {
       browserName: 'chrome',
       platformName: 'Windows 10',
       browserVersion: 'latest'
-    }),
-    sauceLabsLauncher({
-      browserName: 'firefox',
-      platformName: 'Windows 10',
-      browserVersion: 'latest'
     })
   ],
   plugins: [
