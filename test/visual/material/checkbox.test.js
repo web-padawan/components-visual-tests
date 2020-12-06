@@ -5,7 +5,7 @@ describe('checkbox', () => {
   let div, element;
 
   async function visualTest(name) {
-    await visualDiff(div, `material:checkbox:${name}`);
+    await visualDiff(div, `checkbox:${name}`);
   }
 
   before(() => {

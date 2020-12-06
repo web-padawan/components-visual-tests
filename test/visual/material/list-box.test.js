@@ -6,7 +6,7 @@ describe('list-box', () => {
   let div;
 
   async function visualTest(name) {
-    await visualDiff(div, `material:list-box:${name}`);
+    await visualDiff(div, `list-box:${name}`);
   }
 
   before(() => {

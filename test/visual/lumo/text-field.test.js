@@ -5,7 +5,7 @@ describe('text-field', () => {
   let div, element;
 
   async function visualTest(name) {
-    await visualDiff(div, `lumo:text-field:${name}`);
+    await visualDiff(div, `text-field:${name}`);
   }
 
   before(() => {
