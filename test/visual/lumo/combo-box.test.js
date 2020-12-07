@@ -1,4 +1,4 @@
-import { visualDiff } from '../../../src/regression/browser/commands.mjs';
+import { visualDiff } from '@web/test-runner-visual-regression';
 import '@vaadin/vaadin-combo-box/vaadin-combo-box.js';
 
 describe('combo-box', () => {

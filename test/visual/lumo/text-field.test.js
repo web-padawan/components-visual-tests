@@ -1,4 +1,4 @@
-import { visualDiff } from '../../../src/regression/browser/commands.mjs';
+import { visualDiff } from '@web/test-runner-visual-regression';
 import '@vaadin/vaadin-text-field/vaadin-text-field.js';
 
 describe('text-field', () => {
@@ -10,7 +10,7 @@ describe('text-field', () => {
 
   before(() => {
     const range = new Range().createContextualFragment(
-      '<div style="padding: 10px; display: inline-block"></div>'
+      '<div style="padding: 10px; display: inline-block"></div>',
     );
     div = range.firstElementChild;
     document.body.appendChild(div);

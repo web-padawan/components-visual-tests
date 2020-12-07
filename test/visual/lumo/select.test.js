@@ -1,4 +1,4 @@
-import { visualDiff } from '../../../src/regression/browser/commands.mjs';
+import { visualDiff } from '@web/test-runner-visual-regression';
 import '@vaadin/vaadin-select/vaadin-select.js';
 import '@vaadin/vaadin-list-box/vaadin-list-box.js';
 import '@vaadin/vaadin-item/vaadin-item.js';
@@ -12,7 +12,7 @@ describe('select', () => {
 
   before(() => {
     const range = new Range().createContextualFragment(
-      '<div style="padding: 10px; display: inline-block"></div>'
+      '<div style="padding: 10px; display: inline-block"></div>',
     );
     div = range.firstElementChild;
     document.body.appendChild(div);
@@ -52,13 +52,13 @@ describe('select', () => {
   });
 
   it('value', async () => {
-    element.renderer = (root) => {
+    element.renderer = root => {
       root.innerHTML = `
         <vaadin-list-box>
           <vaadin-item>value</vaadin-item>
         </vaadin-list-box>
       `;
-    }
+    };
     element.value = 'value';
     await visualTest('value');
   });
@@ -83,13 +83,13 @@ describe('select', () => {
   });
 
   it('clear button', async () => {
-    element.renderer = (root) => {
+    element.renderer = root => {
       root.innerHTML = `
         <vaadin-list-box>
           <vaadin-item>value</vaadin-item>
         </vaadin-list-box>
       `;
-    }
+    };
     element.value = 'value';
     element.clearButtonVisible = true;
     await visualTest('clear-button');

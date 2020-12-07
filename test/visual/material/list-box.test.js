@@ -1,4 +1,4 @@
-import { visualDiff } from '../../../src/regression/browser/commands.mjs';
+import { visualDiff } from '@web/test-runner-visual-regression';
 import '@vaadin/vaadin-item/theme/material/vaadin-item.js';
 import '@vaadin/vaadin-list-box/theme/material/vaadin-list-box.js';
 

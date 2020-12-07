@@ -1,4 +1,4 @@
-import { visualDiff } from '../../../src/regression/browser/commands.mjs';
+import { visualDiff } from '@web/test-runner-visual-regression';
 import '@vaadin/vaadin-upload/vaadin-upload.js';
 
 describe('upload', () => {
@@ -31,10 +31,10 @@ describe('upload', () => {
   });
 
   describe('files', () => {
-    before(() => {
+    before(() => {
       element.files = [
         { name: 'Don Quixote.pdf', progress: 100, complete: true },
-        { name: 'Hamlet.pdf', progress: 100, complete: true }
+        { name: 'Hamlet.pdf', progress: 100, complete: true },
       ];
     });
 

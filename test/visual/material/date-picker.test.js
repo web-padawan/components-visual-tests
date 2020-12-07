@@ -1,5 +1,4 @@
-
-import { visualDiff } from '../../../src/regression/browser/commands.mjs';
+import { visualDiff } from '@web/test-runner-visual-regression';
 import '@vaadin/vaadin-date-picker/theme/material/vaadin-date-picker.js';
 
 describe('date-picker', () => {
@@ -11,7 +10,7 @@ describe('date-picker', () => {
 
   before(() => {
     const range = new Range().createContextualFragment(
-      '<div style="padding: 10px; display: inline-block"></div>'
+      '<div style="padding: 10px; display: inline-block"></div>',
     );
     div = range.firstElementChild;
     document.body.appendChild(div);
