@@ -1,5 +1,5 @@
-const { createSauceLabsLauncher } = require('./dist/sauce/index');
-const { visualRegressionPlugin } = require('./dist/regression/index');
+const { createSauceLabsLauncher } = require('@web/test-runner-saucelabs');
+const { visualRegressionPlugin } = require('@web/test-runner-visual-regression/plugin');
 const { getBaselineName, getDiffName, getFailedName } = require('./wtr-utils.js');
 
 const sauceLabsLauncher = createSauceLabsLauncher(
