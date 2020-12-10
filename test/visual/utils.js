@@ -6,3 +6,8 @@ export const createTest = (component) => async (target, name) => {
   await visualDiff(target, `${component}:${name}`);
   rtl && document.documentElement.removeAttribute('dir');
 };
+
+export const fixture = (html = '') => {
+  const range = new Range().createContextualFragment(`<div style="padding: 10px; display: inline-block">${html}</div>`);
+  return range.firstElementChild;
+};

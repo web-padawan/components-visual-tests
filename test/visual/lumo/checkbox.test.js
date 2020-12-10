@@ -1,5 +1,5 @@
 import '@vaadin/vaadin-checkbox/vaadin-checkbox.js';
-import { createTest } from '../utils.js';
+import { createTest, fixture } from '../utils.js';
 
 const screenshot = createTest('checkbox');
 
@@ -7,8 +7,7 @@ describe('checkbox', () => {
   let div, element;
 
   before(() => {
-    const range = new Range().createContextualFragment('<div style="padding: 10px; display: inline-block"></div>');
-    div = range.firstElementChild;
+    div = fixture();
     document.body.appendChild(div);
   });
 

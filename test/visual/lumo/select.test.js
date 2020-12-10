@@ -1,7 +1,7 @@
 import '@vaadin/vaadin-select/vaadin-select.js';
 import '@vaadin/vaadin-list-box/vaadin-list-box.js';
 import '@vaadin/vaadin-item/vaadin-item.js';
-import { createTest } from '../utils.js';
+import { createTest, fixture } from '../utils.js';
 
 const screenshot = createTest('select');
 
@@ -9,8 +9,7 @@ describe('select', () => {
   let div, element;
 
   before(() => {
-    const range = new Range().createContextualFragment('<div style="padding: 10px; display: inline-block"></div>');
-    div = range.firstElementChild;
+    div = fixture();
     document.body.appendChild(div);
   });
 

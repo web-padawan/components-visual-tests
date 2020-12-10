@@ -1,5 +1,5 @@
 import '@vaadin/vaadin-date-picker/theme/material/vaadin-date-picker.js';
-import { createTest } from '../utils.js';
+import { createTest, fixture } from '../utils.js';
 
 const screenshot = createTest('date-picker');
 
@@ -7,8 +7,7 @@ describe('date-picker', () => {
   let div, element;
 
   before(() => {
-    const range = new Range().createContextualFragment('<div style="padding: 10px; display: inline-block"></div>');
-    div = range.firstElementChild;
+    div = fixture();
     document.body.appendChild(div);
   });
 

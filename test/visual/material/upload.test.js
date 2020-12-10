@@ -1,5 +1,5 @@
 import '@vaadin/vaadin-upload/theme/material/vaadin-upload.js';
-import { createTest } from '../utils.js';
+import { createTest, fixture } from '../utils.js';
 
 const screenshot = createTest('upload');
 
@@ -7,12 +7,7 @@ describe('upload', () => {
   let div, element;
 
   before(() => {
-    const range = new Range().createContextualFragment(`
-      <div style="padding: 10px; display: inline-block">
-        <vaadin-upload></vaadin-upload>
-      </div>
-    `);
-    div = range.firstElementChild;
+    div = fixture('<vaadin-upload></vaadin-upload>');
     document.body.appendChild(div);
     element = div.firstElementChild;
   });
