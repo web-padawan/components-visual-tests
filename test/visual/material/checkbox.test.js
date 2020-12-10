@@ -1,12 +1,10 @@
-import { visualDiff } from '@web/test-runner-visual-regression';
 import '@vaadin/vaadin-checkbox/theme/material/vaadin-checkbox.js';
+import { createTest } from '../utils.js';
+
+const screenshot = createTest('checkbox');
 
 describe('checkbox', () => {
   let div, element;
-
-  async function visualTest(name) {
-    await visualDiff(div, `checkbox:${name}`);
-  }
 
   before(() => {
     const range = new Range().createContextualFragment(
@@ -27,48 +25,47 @@ describe('checkbox', () => {
   });
 
   it('basic', async () => {
-    await visualTest('basic');
+    await screenshot(div, 'basic');
   });
 
   it('focus-ring', async () => {
     element.setAttribute('focus-ring', '');
-    await visualTest('focus-ring');
+    await screenshot(div, 'focus-ring');
   });
 
   it('disabled', async () => {
     element.disabled = true;
-    await visualTest('disabled');
+    await screenshot(div, 'disabled');
   });
 
   it('checked', async () => {
     element.checked = true;
-    await visualTest('checked');
+    await screenshot(div, 'checked');
   });
 
   it('indeterminate', async () => {
     element.indeterminate = true;
-    await visualTest('indeterminate');
+    await screenshot(div, 'indeterminate');
   });
 
   it('disabled checked', async () => {
     element.disabled = true;
     element.checked = true;
-    await visualTest('disabled-checked');
+    await screenshot(div, 'disabled-checked');
   });
 
   it('disabled indeterminate', async () => {
     element.disabled = true;
     element.indeterminate = true;
-    await visualTest('disabled-indeterminate');
+    await screenshot(div, 'disabled-indeterminate');
   });
 
   it('empty', async () => {
     element.textContent = '';
-    await visualTest('empty');
+    await screenshot(div, 'empty');
   });
 
   it('RTL', async () => {
-    document.documentElement.setAttribute('dir', 'rtl');
-    await visualTest('rtl');
+    await screenshot(div, 'rtl');
   });
 });

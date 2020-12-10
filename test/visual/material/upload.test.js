@@ -1,15 +1,10 @@
-import { visualDiff } from '@web/test-runner-visual-regression';
 import '@vaadin/vaadin-upload/theme/material/vaadin-upload.js';
+import { createTest } from '../utils.js';
+
+const screenshot = createTest('upload');
 
 describe('upload', () => {
   let div, element;
-
-  async function visualTest(name) {
-    const rtl = name.startsWith('rtl');
-    rtl && document.documentElement.setAttribute('dir', 'rtl');
-    await visualDiff(div, `upload:${name}`);
-    rtl && document.documentElement.removeAttribute('dir');
-  }
 
   before(() => {
     const range = new Range().createContextualFragment(`
@@ -23,11 +18,11 @@ describe('upload', () => {
   });
 
   it('basic', async () => {
-    await visualTest('basic');
+    await screenshot(div, 'basic');
   });
 
   it('RTL', async () => {
-    await visualTest('rtl');
+    await screenshot(div, 'rtl');
   });
 
   describe('files', () => {
@@ -39,11 +34,11 @@ describe('upload', () => {
     });
 
     it('files', async () => {
-      await visualTest('files');
+      await screenshot(div, 'files');
     });
 
     it('RTL files', async () => {
-      await visualTest('rtl-files');
+      await screenshot(div, 'rtl-files');
     });
   });
 });

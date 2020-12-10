@@ -1,12 +1,10 @@
-import { visualDiff } from '@web/test-runner-visual-regression';
 import '@vaadin/vaadin-progress-bar/theme/material/vaadin-progress-bar.js';
+import { createTest } from '../utils.js';
+
+const screenshot = createTest('progress-bar');
 
 describe('progress-bar', () => {
   let div;
-
-  async function visualTest(name) {
-    await visualDiff(div, `progress-bar:${name}`);
-  }
 
   before(() => {
     const range = new Range().createContextualFragment(`
@@ -19,12 +17,10 @@ describe('progress-bar', () => {
   });
 
   it('basic', async () => {
-    await visualTest('basic');
+    await screenshot(div, 'basic');
   });
 
   it('RTL', async () => {
-    document.documentElement.setAttribute('dir', 'rtl');
-    await visualTest('rtl');
-    document.documentElement.removeAttribute('dir');
+    await screenshot(div, 'rtl');
   });
 });

@@ -1,13 +1,11 @@
-import { visualDiff } from '@web/test-runner-visual-regression';
 import '@vaadin/vaadin-item/vaadin-item.js';
 import '@vaadin/vaadin-list-box/vaadin-list-box.js';
+import { createTest } from '../utils.js';
+
+const screenshot = createTest('list-box');
 
 describe('list-box', () => {
   let div;
-
-  async function visualTest(name) {
-    await visualDiff(div, `list-box:${name}`);
-  }
 
   before(() => {
     const range = new Range().createContextualFragment(`
@@ -26,11 +24,10 @@ describe('list-box', () => {
   });
 
   it('basic', async () => {
-    await visualTest('basic');
+    await screenshot(div, 'basic');
   });
 
   it('RTL', async () => {
-    document.documentElement.setAttribute('dir', 'rtl');
-    await visualTest('rtl');
+    await screenshot(div, 'rtl');
   });
 });
