@@ -6,7 +6,7 @@
 npm i
 ```
 
-## Run visual visual tests
+## Run visual tests
 
 Lumo theme:
 
