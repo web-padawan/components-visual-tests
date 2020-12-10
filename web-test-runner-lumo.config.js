@@ -5,7 +5,7 @@ const { getBaselineName, getDiffName, getFailedName } = require('./wtr-utils.js'
 const sauceLabsLauncher = createSauceLabsLauncher(
   {
     user: process.env.SAUCE_USERNAME,
-    key: process.env.SAUCE_ACCESS_KEY,
+    key: process.env.SAUCE_ACCESS_KEY
   },
   {
     name: 'Lumo visual tests',

@@ -9,9 +9,7 @@ describe('select', () => {
   let div, element;
 
   before(() => {
-    const range = new Range().createContextualFragment(
-      '<div style="padding: 10px; display: inline-block"></div>',
-    );
+    const range = new Range().createContextualFragment('<div style="padding: 10px; display: inline-block"></div>');
     div = range.firstElementChild;
     document.body.appendChild(div);
   });
@@ -50,7 +48,7 @@ describe('select', () => {
   });
 
   it('value', async () => {
-    element.renderer = root => {
+    element.renderer = (root) => {
       root.innerHTML = `
         <vaadin-list-box>
           <vaadin-item>value</vaadin-item>
@@ -81,7 +79,7 @@ describe('select', () => {
   });
 
   it('clear button', async () => {
-    element.renderer = root => {
+    element.renderer = (root) => {
       root.innerHTML = `
         <vaadin-list-box>
           <vaadin-item>value</vaadin-item>

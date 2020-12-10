@@ -5,7 +5,7 @@ const { getBaselineName, getDiffName, getFailedName } = require('./wtr-utils.js'
 const sauceLabsLauncher = createSauceLabsLauncher(
   {
     user: process.env.SAUCE_USERNAME,
-    key: process.env.SAUCE_ACCESS_KEY,
+    key: process.env.SAUCE_ACCESS_KEY
   },
   {
     name: 'Material visual tests',
@@ -42,7 +42,7 @@ const config = {
       update: process.env.TEST_ENV === 'update'
     })
   ],
-  testRunnerHtml: testFramework => `
+  testRunnerHtml: (testFramework) => `
     <!DOCTYPE html>
     <html>
       <body>

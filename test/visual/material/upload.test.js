@@ -29,7 +29,7 @@ describe('upload', () => {
     before(() => {
       element.files = [
         { name: 'Don Quixote.pdf', progress: 100, complete: true },
-        { name: 'Hamlet.pdf', progress: 100, complete: true },
+        { name: 'Hamlet.pdf', progress: 100, complete: true }
       ];
     });
 

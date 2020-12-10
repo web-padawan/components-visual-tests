@@ -7,9 +7,7 @@ describe('text-field', () => {
   let div, element;
 
   before(() => {
-    const range = new Range().createContextualFragment(
-      '<div style="padding: 10px; display: inline-block"></div>',
-    );
+    const range = new Range().createContextualFragment('<div style="padding: 10px; display: inline-block"></div>');
     div = range.firstElementChild;
     document.body.appendChild(div);
   });
