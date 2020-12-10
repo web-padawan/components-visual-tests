@@ -24,6 +24,6 @@
     "@vaadin/vaadin-upload": "^4.4.1",
     "@web/test-runner": "^0.10.0",
     "@web/test-runner-saucelabs": "^0.2.0",
-    "@web/test-runner-visual-regression": "^0.2.2"
+    "@web/test-runner-visual-regression": "^0.2.3"
   }
 }
