@@ -33,3 +33,15 @@ Material theme:
 ```sh
 npm run update-material
 ```
+
+## Run tests for single file
+
+```sh
+npm run test-lumo -- --group checkbox
+```
+
+## Update screenshots for single file
+
+```sh
+npm run update-lumo -- --group checkbox
+```

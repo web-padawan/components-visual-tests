@@ -1,6 +1,6 @@
 const { createSauceLabsLauncher } = require('@web/test-runner-saucelabs');
 const { visualRegressionPlugin } = require('@web/test-runner-visual-regression/plugin');
-const { getBaselineName, getDiffName, getFailedName } = require('./wtr-utils.js');
+const { getBaselineName, getDiffName, getFailedName, getTestGroups } = require('./wtr-utils.js');
 
 const sauceLabsLauncher = createSauceLabsLauncher(
   {
@@ -23,6 +23,7 @@ const config = {
       timeout: '20000' // default 2000
     }
   },
+  groups: getTestGroups('material'),
   browsers: [
     sauceLabsLauncher({
       browserName: 'chrome',

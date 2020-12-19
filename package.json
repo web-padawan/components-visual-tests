@@ -3,10 +3,10 @@
   "private": true,
   "description": "",
   "scripts": {
-    "test-lumo": "web-test-runner --config web-test-runner-lumo.config.js test/visual/lumo/**/*.test.js",
-    "test-material": "web-test-runner --config web-test-runner-material.config.js test/visual/material/**/*.test.js",
-    "update-lumo": "TEST_ENV=update npm run test-lumo",
-    "update-material": "TEST_ENV=update npm run test-material"
+    "test-lumo": "web-test-runner --config web-test-runner-lumo.config.js",
+    "test-material": "web-test-runner --config web-test-runner-material.config.js",
+    "update-lumo": "TEST_ENV=update web-test-runner --config web-test-runner-lumo.config.js",
+    "update-material": "TEST_ENV=update web-test-runner --config web-test-runner-material.config.js"
   },
   "keywords": [],
   "license": "MIT",
