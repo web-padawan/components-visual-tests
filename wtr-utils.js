@@ -3,7 +3,12 @@ const path = require('path');
 
 const getFileName = ({ browser, name }, type, diff) => {
   const [component, test] = name.split(':');
-  return path.join(browser.replace('windows ', ''), type, component, diff ? `${test}-diff` : test);
+  return path.join(
+    browser.replace('Windows 10 ', '').replace(' latest', ''),
+    type,
+    component,
+    diff ? `${test}-diff` : test
+  );
 };
 
 exports.getBaselineName = (args) => getFileName(args, 'baseline');
